@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Policy Search — AxisPoint PPS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Muli:wght@200;300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="site.css">
+</head>
+<body class="portal-page">
+
+    <header class="site-header">
+        <div class="logo-text">Axis<span>Point</span> PPS</div>
+        <div class="header-right">
+            <div class="header-user">
+                Logged in as <span>jsmith</span>
+                <a href="login.html">Sign Out</a>
+            </div>
+        </div>
+    </header>
+
+    <nav class="nav-tabs-bar">
+        <a href="policy-search.html" class="nav-tab active">Policies</a>
+        <a href="#" class="nav-tab">Billing</a>
+        <a href="#" class="nav-tab">Documents</a>
+        <a href="#" class="nav-tab">Reports</a>
+        <a href="#" class="nav-tab">Admin</a>
+    </nav>
+
+    <form method="post" action="./search/policysearch.aspx" id="form1">
+        <div class="aspNetHidden">
+            <input type="hidden" name="__EVENTTARGET"   id="__EVENTTARGET"   value="">
+            <input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="">
+            <input type="hidden" name="__VIEWSTATE"     id="__VIEWSTATE"     value="ZpTqK8mwRX4hNj0LDvEyUc6sBO2Ia5Fg3lPnWe9Ct7Mu1oXzHQf+dVbJkrSAT/YhF4RNp2wGcMxLqK8Uy3Jz6fE0ePvOmDiA1BtC5Wh+sGnXL7rI2oFk9Qu4Zd/KcMpN3eLfY1vHrQjTsXA+WbD6Oy0mP=">
+        </div>
+
+        <script type="text/javascript">
+        //<![CDATA[
+        var theForm = document.forms['form1'];
+        if (!theForm) { theForm = document.form1; }
+        var currentPage = 1;
+        var currentSort = { col: null, dir: 'asc' };
+        var lastResults  = [];
+
+        function __doPostBack(eventTarget, eventArgument) {
+            if (eventTarget === 'ctl00$MainContent$SearchButton') {
+                runSearch();
+            } else if (eventTarget === 'ctl00$MainContent$PolicyGrid') {
+                if (eventArgument.indexOf('Page$') === 0) {
+                    var pg = parseInt(eventArgument.replace('Page$', ''), 10);
+                    renderPage(lastResults, pg);
+                } else if (eventArgument.indexOf('Sort$') === 0) {
+                    var col = eventArgument.replace('Sort$', '');
+                    sortResults(col);
+                }
+            }
+        }
+        //]]>
+        </script>
+
+        <div class="aspNetHidden">
+            <input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="7B3C119F">
+            <input type="hidden" name="__EVENTVALIDATION"   id="__EVENTVALIDATION"   value="Rq2YmXfLpZ0KjBcT8eN5hV3wDsGiA1oUyMt6PFrC4vE7+bHnOq/KzJWxRp">
+        </div>
+
+        <div class="main-wrapper">
+            <h1 class="page-heading">Policy Search</h1>
+
+            <!-- Search panel -->
+            <div class="panel" id="ctl00_MainContent_SearchPanel">
+                <div class="panel-header">Search Criteria</div>
+                <div class="panel-body">
+                    <div class="search-row">
+                        <div class="search-field">
+                            <label for="ctl00_MainContent_txtPolicyNumber">Policy Number</label>
+                            <div class="enhanced-input">
+                                <input id="ctl00_MainContent_txtPolicyNumber"
+                                    name="ctl00$MainContent$txtPolicyNumber"
+                                    class="enhanced-input-native" type="text"
+                                    placeholder="e.g. SNI-A-0045123">
+                            </div>
+                        </div>
+                        <div class="search-field">
+                            <label for="ctl00_MainContent_txtLastName">Last Name</label>
+                            <div class="enhanced-input">
+                                <input id="ctl00_MainContent_txtLastName"
+                                    name="ctl00$MainContent$txtLastName"
+                                    class="enhanced-input-native" type="text"
+                                    placeholder="Last name">
+                            </div>
+                        </div>
+                        <div class="search-field">
+                            <label for="ctl00_MainContent_txtFirstName">First Name</label>
+                            <div class="enhanced-input">
+                                <input id="ctl00_MainContent_txtFirstName"
+                                    name="ctl00$MainContent$txtFirstName"
+                                    class="enhanced-input-native" type="text"
+                                    placeholder="First name">
+                            </div>
+                        </div>
+                        <div class="search-field" style="flex:0 0 160px">
+                            <label for="ctl00_MainContent_ddlPolicyType">Policy Type</label>
+                            <div class="enhanced-input">
+                                <select id="ctl00_MainContent_ddlPolicyType"
+                                    name="ctl00$MainContent$ddlPolicyType"
+                                    class="enhanced-input-native">
+                                    <option value="">— All Types —</option>
+                                    <option value="Auto">Auto</option>
+                                    <option value="Home">Home</option>
+                                    <option value="Life">Life</option>
+                                    <option value="Commercial">Commercial</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="search-field" style="flex:0 0 150px">
+                            <label for="ctl00_MainContent_ddlStatus">Status</label>
+                            <div class="enhanced-input">
+                                <select id="ctl00_MainContent_ddlStatus"
+                                    name="ctl00$MainContent$ddlStatus"
+                                    class="enhanced-input-native">
+                                    <option value="">— All —</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Pending">Pending</option>
+                                    <option value="Cancelled">Cancelled</option>
+                                    <option value="Expired">Expired</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div style="padding-bottom:2px;">
+                            <input type="button"
+                                name="ctl00$MainContent$SearchButton"
+                                id="ctl00_MainContent_SearchButton"
+                                value="Search"
+                                onclick="this.disabled=true; setTimeout(function(){ __doPostBack('ctl00$MainContent$SearchButton',''); document.getElementById('ctl00_MainContent_SearchButton').disabled=false; }, 400);"
+                                class="enhanced-button primary-button"
+                                style="padding:9px 24px;">
+                        </div>
+                        <div style="padding-bottom:2px;">
+                            <input type="button"
+                                name="ctl00$MainContent$ClearButton"
+                                id="ctl00_MainContent_ClearButton"
+                                value="Clear"
+                                onclick="clearSearch();"
+                                class="enhanced-button secondary-button"
+                                style="padding:9px 18px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Validation summary (errors appear here, NOT inline) -->
+            <div id="ctl00_MainContent_ValidationSummary1" class="validation-summary-errors">
+                <p>Please correct the following:</p>
+                <ul id="ctl00_MainContent_ValidationSummary1_List"></ul>
+            </div>
+
+            <!-- Results area -->
+            <div id="ResultsPanel" style="display:none;">
+                <div class="panel">
+                    <div class="panel-header" id="ResultsPanelHeader">Search Results</div>
+                    <div class="gridview-container">
+                        <table class="GridView" id="ctl00_MainContent_PolicyGrid"
+                            cellspacing="0" cellpadding="0" border="0">
+                            <thead>
+                                <tr class="GridHeader">
+                                    <th scope="col"><a href="javascript:__doPostBack('ctl00$MainContent$PolicyGrid','Sort$id')">Policy&nbsp;#</a></th>
+                                    <th scope="col"><a href="javascript:__doPostBack('ctl00$MainContent$PolicyGrid','Sort$insured')">Insured</a></th>
+                                    <th scope="col"><a href="javascript:__doPostBack('ctl00$MainContent$PolicyGrid','Sort$address')">Address</a></th>
+                                    <th scope="col"><a href="javascript:__doPostBack('ctl00$MainContent$PolicyGrid','Sort$type')">Type</a></th>
+                                    <th scope="col"><a href="javascript:__doPostBack('ctl00$MainContent$PolicyGrid','Sort$effective')">Effective</a></th>
+                                    <th scope="col"><a href="javascript:__doPostBack('ctl00$MainContent$PolicyGrid','Sort$expiration')">Expiration</a></th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ctl00_MainContent_PolicyGrid_Body">
+                            </tbody>
+                            <tfoot>
+                                <tr class="GridPager" id="ctl00_MainContent_PolicyGrid_Pager">
+                                    <td colspan="8">
+                                        <span class="pager-label" id="PagerLabel"></span>
+                                        <span id="PagerControls"></span>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <script type="text/javascript">
+    //<![CDATA[
+
+    var PAGE_SIZE = 5;
+
+    var allPolicies = [
+        { id: 'SNI-A-0045123', insured: 'Johnson, Margaret A.', firstName: 'Margaret', lastName: 'Johnson',
+          address: '4821 Riverside Dr, Orlando, FL 32801', type: 'Auto',
+          effective: '01/15/2024', expiration: '01/15/2025', status: 'Active', zip: '32801' },
+        { id: 'SNI-H-0045124', insured: 'Johnson, Margaret A.', firstName: 'Margaret', lastName: 'Johnson',
+          address: '4821 Riverside Dr, Orlando, FL 32801', type: 'Home',
+          effective: '01/15/2024', expiration: '01/15/2025', status: 'Active', zip: '32801' },
+        { id: 'SNI-A-0067890', insured: 'Johnson, Thomas R.', firstName: 'Thomas', lastName: 'Johnson',
+          address: '990 Lakeview Ave, Orlando, FL 32801', type: 'Auto',
+          effective: '03/01/2024', expiration: '03/01/2025', status: 'Active', zip: '32801' },
+        { id: 'SNI-L-0012345', insured: 'Ramirez, Carlos E.', firstName: 'Carlos', lastName: 'Ramirez',
+          address: '109 Magnolia Ln, Tampa, FL 33602', type: 'Life',
+          effective: '06/10/2022', expiration: '06/10/2025', status: 'Active', zip: '33602' },
+        { id: 'SNI-A-0078901', insured: 'Williams, Denise L.', firstName: 'Denise', lastName: 'Williams',
+          address: '2200 Peachtree Rd NE, Atlanta, GA 30309', type: 'Auto',
+          effective: '07/22/2023', expiration: '07/22/2024', status: 'Cancelled', zip: '30309' },
+        { id: 'SNI-H-0089012', insured: 'Thompson, Robert J.', firstName: 'Robert', lastName: 'Thompson',
+          address: '814 Oak Street, Charlotte, NC 28202', type: 'Home',
+          effective: '09/01/2023', expiration: '09/01/2024', status: 'Expired', zip: '28202' },
+        { id: 'SNI-A-0034567', insured: 'Davis, James K.', firstName: 'James', lastName: 'Davis',
+          address: '501 Meeting St, Charleston, SC 29403', type: 'Auto',
+          effective: '11/30/2023', expiration: '11/30/2024', status: 'Pending', zip: '29403' },
+    ];
+
+    function runSearch() {
+        var policyNum  = document.getElementById('ctl00_MainContent_txtPolicyNumber').value.trim().toLowerCase();
+        var lastName   = document.getElementById('ctl00_MainContent_txtLastName').value.trim().toLowerCase();
+        var firstName  = document.getElementById('ctl00_MainContent_txtFirstName').value.trim().toLowerCase();
+        var policyType = document.getElementById('ctl00_MainContent_ddlPolicyType').value;
+        var status     = document.getElementById('ctl00_MainContent_ddlStatus').value;
+
+        var vs = document.getElementById('ctl00_MainContent_ValidationSummary1');
+        var vsList = document.getElementById('ctl00_MainContent_ValidationSummary1_List');
+
+        /* require at least one criterion */
+        if (!policyNum && !lastName && !firstName && !policyType && !status) {
+            vsList.innerHTML = '<li>Please enter at least one search criterion.</li>';
+            vs.classList.add('visible');
+            document.getElementById('ResultsPanel').style.display = 'none';
+            return;
+        }
+        vs.classList.remove('visible');
+
+        var results = allPolicies.filter(function(p) {
+            if (policyNum   && p.id.toLowerCase().indexOf(policyNum) === -1)         return false;
+            if (lastName    && p.lastName.toLowerCase().indexOf(lastName) === -1)    return false;
+            if (firstName   && p.firstName.toLowerCase().indexOf(firstName) === -1)  return false;
+            if (policyType  && p.type !== policyType)                                return false;
+            if (status      && p.status !== status)                                  return false;
+            return true;
+        });
+
+        lastResults  = results;
+        currentPage  = 1;
+        currentSort  = { col: null, dir: 'asc' };
+        renderPage(results, 1);
+    }
+
+    function sortResults(col) {
+        if (currentSort.col === col) {
+            currentSort.dir = (currentSort.dir === 'asc') ? 'desc' : 'asc';
+        } else {
+            currentSort.col = col;
+            currentSort.dir = 'asc';
+        }
+        lastResults.sort(function(a, b) {
+            var av = a[col] || '', bv = b[col] || '';
+            var cmp = av < bv ? -1 : av > bv ? 1 : 0;
+            return currentSort.dir === 'asc' ? cmp : -cmp;
+        });
+        renderPage(lastResults, currentPage);
+    }
+
+    function renderPage(results, page) {
+        currentPage = page;
+        var panel  = document.getElementById('ResultsPanel');
+        var header = document.getElementById('ResultsPanelHeader');
+        var tbody  = document.getElementById('ctl00_MainContent_PolicyGrid_Body');
+        var pagerLabel    = document.getElementById('PagerLabel');
+        var pagerControls = document.getElementById('PagerControls');
+        var pagerRow      = document.getElementById('ctl00_MainContent_PolicyGrid_Pager');
+
+        panel.style.display = 'block';
+        tbody.innerHTML = '';
+
+        if (results.length === 0) {
+            header.textContent = 'Search Results — 0 Records Found';
+            var tr = document.createElement('tr');
+            tr.className = 'no-results-row';
+            tr.innerHTML = '<td colspan="8">No records matched your search criteria.</td>';
+            tbody.appendChild(tr);
+            pagerRow.style.display = 'none';
+            return;
+        }
+
+        var total  = results.length;
+        var pages  = Math.ceil(total / PAGE_SIZE);
+        var start  = (page - 1) * PAGE_SIZE;
+        var end    = Math.min(start + PAGE_SIZE, total);
+        var slice  = results.slice(start, end);
+
+        header.textContent = 'Search Results — ' + total + ' Record' + (total !== 1 ? 's' : '') + ' Found';
+
+        slice.forEach(function(p, i) {
+            var tr = document.createElement('tr');
+            tr.id  = 'ctl00_MainContent_PolicyGrid_ctl' + String(i + 2).padStart(2, '0');
+            tr.className = (i % 2 === 0) ? 'GridRow' : 'GridAltRow';
+            var rowIdx = start + i;
+            /* action column: mix of <a> and <input type="button"> to add DOM difficulty */
+            var actionCell = (rowIdx % 2 === 0)
+                ? '<a href="endorsement.html?policy=' + encodeURIComponent(p.id) + '" id="' + tr.id + '_lnkView">View</a>'
+                : '<input type="button" value="View" class="grid-btn" id="' + tr.id + '_btnView" onclick="window.location=\'endorsement.html?policy=' + encodeURIComponent(p.id) + '\'">';
+            tr.innerHTML =
+                '<td><a href="endorsement.html?policy=' + encodeURIComponent(p.id) + '" id="' + tr.id + '_lnkPolicy">' + p.id + '</a></td>' +
+                '<td>' + p.insured + '</td>' +
+                '<td>' + p.address + '</td>' +
+                '<td>' + p.type + '</td>' +
+                '<td>' + p.effective + '</td>' +
+                '<td>' + p.expiration + '</td>' +
+                '<td><span class="status-badge status-' + p.status + '">' + p.status + '</span></td>' +
+                '<td>' + actionCell + '</td>';
+            tbody.appendChild(tr);
+        });
+
+        /* pager */
+        if (pages <= 1) {
+            pagerRow.style.display = 'none';
+        } else {
+            pagerRow.style.display = '';
+            pagerLabel.textContent = 'Showing ' + (start+1) + '–' + end + ' of ' + total + '  ';
+            var html = '';
+            for (var pg = 1; pg <= pages; pg++) {
+                if (pg === page) {
+                    html += '<span class="pager-current-page">' + pg + '</span>';
+                } else {
+                    html += '<a class="pager-page" href="javascript:__doPostBack(\'ctl00$MainContent$PolicyGrid\',\'Page$' + pg + '\')">' + pg + '</a>';
+                }
+            }
+            pagerControls.innerHTML = html;
+        }
+    }
+
+    function clearSearch() {
+        document.getElementById('ctl00_MainContent_txtPolicyNumber').value = '';
+        document.getElementById('ctl00_MainContent_txtLastName').value     = '';
+        document.getElementById('ctl00_MainContent_txtFirstName').value    = '';
+        document.getElementById('ctl00_MainContent_ddlPolicyType').value   = '';
+        document.getElementById('ctl00_MainContent_ddlStatus').value       = '';
+        document.getElementById('ctl00_MainContent_ValidationSummary1').classList.remove('visible');
+        document.getElementById('ResultsPanel').style.display = 'none';
+        lastResults = [];
+    }
+
+    //]]>
+    </script>
+
+</body>
+</html>

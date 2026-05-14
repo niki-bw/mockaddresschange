@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Endorsement Request — AxisPoint PPS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Muli:wght@200;300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="site.css">
+</head>
+<body class="portal-page">
+
+    <header class="site-header">
+        <div class="logo-text">Axis<span>Point</span> PPS</div>
+        <div class="header-right">
+            <div class="header-user">
+                Logged in as <span>jsmith</span>
+                <a href="login.html">Sign Out</a>
+            </div>
+        </div>
+    </header>
+
+    <nav class="nav-tabs-bar">
+        <a href="policy-search.html" class="nav-tab active">Policies</a>
+        <a href="#" class="nav-tab">Billing</a>
+        <a href="#" class="nav-tab">Documents</a>
+        <a href="#" class="nav-tab">Reports</a>
+        <a href="#" class="nav-tab">Admin</a>
+    </nav>
+
+    <form method="post" action="./policy/endorsement.aspx" id="form1" novalidate>
+        <div class="aspNetHidden">
+            <input type="hidden" name="__EVENTTARGET"   id="__EVENTTARGET"   value="">
+            <input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="">
+            <input type="hidden" name="__VIEWSTATE"     id="__VIEWSTATE"     value="pLKqY8xNzR4mDjE1IeFbUvG0AcW5TnO3HsJ9CdBiP2MwX6QtF7VoZ+hKlS/rUgNxAy4JpO0LmB3Wk7Ce6TdY/VzFQ+aKhSr2gNwMqXPbL9Eu5Jo3IyD8RtCm0Af1=">
+        </div>
+
+        <script type="text/javascript">
+        //<![CDATA[
+        var theForm = document.forms['form1'];
+        if (!theForm) { theForm = document.form1; }
+        function __doPostBack(eventTarget, eventArgument) {
+            if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+                theForm.__EVENTTARGET.value  = eventTarget;
+                theForm.__EVENTARGUMENT.value = eventArgument;
+            }
+        }
+        //]]>
+        </script>
+
+        <div class="aspNetHidden">
+            <input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="2E9A04C7">
+            <input type="hidden" name="__EVENTVALIDATION"   id="__EVENTVALIDATION"   value="Lk8fYrNqP0CjWmVsTb4eH6aXgDuOzI2iE3oF5cAJM7nBKGRlh+pUQ9wd1v=">
+        </div>
+
+        <div class="main-wrapper">
+            <div style="font-size:12px;color:#5a6a7a;margin-bottom:14px;">
+                <a href="policy-search.html" style="color:#0066cc;text-decoration:none;">Policy Search</a>
+                <span style="margin:0 6px;">›</span>
+                <span id="BreadcrumbPolicy">—</span>
+                <span style="margin:0 6px;">›</span>
+                <span>Endorsement Request</span>
+            </div>
+
+            <h1 class="page-heading">Endorsement Request</h1>
+
+            <!-- Policy info banner -->
+            <div class="confirm-card" style="margin-bottom:24px;">
+                <div class="confirm-card-header">Policy Information</div>
+                <div class="confirm-card-body" style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px 20px;padding:16px 24px;">
+                    <div><div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#5a6a7a;margin-bottom:3px;">Policy Number</div><div id="InfoPolicyNumber" style="font-size:14px;">—</div></div>
+                    <div><div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#5a6a7a;margin-bottom:3px;">Insured</div><div id="InfoInsured" style="font-size:14px;">—</div></div>
+                    <div><div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#5a6a7a;margin-bottom:3px;">Type</div><div id="InfoType" style="font-size:14px;">—</div></div>
+                    <div><div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#5a6a7a;margin-bottom:3px;">Status</div><div id="InfoStatus" style="font-size:14px;">—</div></div>
+                </div>
+            </div>
+
+            <!-- Wizard progress -->
+            <div class="wizard-progress" id="ctl00_MainContent_Wizard1_Header">
+                <div class="wizard-step-indicator">
+                    <div class="step-circle active" id="Step1Circle">1</div>
+                    <div class="step-title active" id="Step1Title">Change Type</div>
+                </div>
+                <div class="wizard-connector" id="Connector1"></div>
+                <div class="wizard-step-indicator">
+                    <div class="step-circle" id="Step2Circle">2</div>
+                    <div class="step-title" id="Step2Title">Change Details</div>
+                </div>
+                <div class="wizard-connector" id="Connector2"></div>
+                <div class="wizard-step-indicator">
+                    <div class="step-circle" id="Step3Circle">3</div>
+                    <div class="step-title" id="Step3Title">Review &amp; Submit</div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header" id="WizardPanelHeader">Step 1 of 3 — Select Change Type</div>
+                <div class="panel-body">
+
+                    <!-- ════ STEP 1 ════ -->
+                    <div id="WizardStep1" class="wizard-content active">
+                        <div class="form-section-title">What type of change are you requesting?</div>
+
+                        <div id="ctl00_MainContent_ddlChangeType_FormGroup" class="form-group enhanced-input-form-group" style="max-width:380px;">
+                            <div class="control-group">
+                                <div id="ctl00_MainContent_ddlChangeType_EnhancedInput" class="enhanced-input">
+                                    <select id="ctl00_MainContent_ddlChangeType"
+                                        name="ctl00$MainContent$ddlChangeType"
+                                        class="enhanced-input-native"
+                                        aria-describedby="ctl00_MainContent_ddlChangeType_NotificationHost">
+                                        <option value="">— Select Change Type —</option>
+                                        <option value="AddressChange">Address Change</option>
+                                        <option value="NameCorrection">Insured Name Correction</option>
+                                        <option value="VehicleChange">Vehicle Change (Auto)</option>
+                                        <option value="CoverageAdjustment">Coverage Adjustment</option>
+                                        <option value="LienholderUpdate">Lienholder Update</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div id="ctl00_MainContent_ddlChangeType_NotificationHost" class="notification-host" aria-live="assertive"></div>
+                        </div>
+
+                        <div class="btn-row">
+                            <input type="button" name="ctl00$MainContent$Wizard1$StartNavigationTemplateContainerID$NextButton"
+                                id="ctl00_MainContent_Wizard1_StartNavigationTemplateContainerID_NextButton"
+                                value="Next ›" class="enhanced-button primary-button"
+                                onclick="step1Next();">
+                        </div>
+                    </div>
+
+                    <!-- ════ STEP 2 ════ -->
+                    <div id="WizardStep2" class="wizard-content">
+
+                        <!-- Validation summary (top of step, not inline) -->
+                        <div id="ctl00_MainContent_ValidationSummary1" class="validation-summary-errors">
+                            <p>Please correct the following errors before continuing:</p>
+                            <ul id="ctl00_MainContent_ValidationSummary1_List"></ul>
+                        </div>
+
+                        <!-- Address Change fields -->
+                        <div id="AddressChangeFields">
+                            <div class="form-section-title">New Address Information</div>
+
+                            <div class="form-grid full-width" style="margin-bottom:20px;">
+
+                                <div class="field-group full-width">
+                                    <label class="field-label" for="ctl00_MainContent_txtAddress1">
+                                        Address Line 1 <span style="color:#cc0000">*</span>
+                                    </label>
+                                    <div id="ctl00_MainContent_txtAddress1_EnhancedInput" class="enhanced-input">
+                                        <input id="ctl00_MainContent_txtAddress1"
+                                            name="ctl00$MainContent$txtAddress1"
+                                            class="enhanced-input-native" type="text"
+                                            placeholder="Street address"
+                                            aria-describedby="ctl00_MainContent_txtAddress1_NotificationHost">
+                                    </div>
+                                    <div id="ctl00_MainContent_txtAddress1_NotificationHost" class="notification-host" aria-live="assertive"></div>
+                                </div>
+
+                                <div class="field-group full-width">
+                                    <label class="field-label" for="ctl00_MainContent_txtAddress2">Address Line 2</label>
+                                    <div class="enhanced-input">
+                                        <input id="ctl00_MainContent_txtAddress2"
+                                            name="ctl00$MainContent$txtAddress2"
+                                            class="enhanced-input-native" type="text"
+                                            placeholder="Apt, Suite, Unit (optional)">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-grid three-col" style="margin-bottom:20px;">
+
+                                <div class="field-group">
+                                    <label class="field-label" for="ctl00_MainContent_txtCity">
+                                        City <span style="color:#cc0000">*</span>
+                                    </label>
+                                    <div id="ctl00_MainContent_txtCity_EnhancedInput" class="enhanced-input">
+                                        <input id="ctl00_MainContent_txtCity"
+                                            name="ctl00$MainContent$txtCity"
+                                            class="enhanced-input-native" type="text"
+                                            placeholder="City"
+                                            aria-describedby="ctl00_MainContent_txtCity_NotificationHost">
+                                    </div>
+                                    <div id="ctl00_MainContent_txtCity_NotificationHost" class="notification-host" aria-live="assertive"></div>
+                                </div>
+
+                                <div class="field-group">
+                                    <label class="field-label" for="ctl00_MainContent_ddlState">
+                                        State <span style="color:#cc0000">*</span>
+                                    </label>
+                                    <div id="ctl00_MainContent_ddlState_EnhancedInput" class="enhanced-input">
+                                        <select id="ctl00_MainContent_ddlState"
+                                            name="ctl00$MainContent$ddlState"
+                                            class="enhanced-input-native"
+                                            aria-describedby="ctl00_MainContent_ddlState_NotificationHost">
+                                            <option value="">— Select —</option>
+                                            <option value="AL">Alabama</option>
+                                            <option value="AZ">Arizona</option>
+                                            <option value="CA">California</option>
+                                            <option value="FL">Florida</option>
+                                            <option value="GA">Georgia</option>
+                                            <option value="IL">Illinois</option>
+                                            <option value="NC">North Carolina</option>
+                                            <option value="NJ">New Jersey</option>
+                                            <option value="NY">New York</option>
+                                            <option value="OH">Ohio</option>
+                                            <option value="PA">Pennsylvania</option>
+                                            <option value="SC">South Carolina</option>
+                                            <option value="TN">Tennessee</option>
+                                            <option value="TX">Texas</option>
+                                            <option value="VA">Virginia</option>
+                                        </select>
+                                    </div>
+                                    <div id="ctl00_MainContent_ddlState_NotificationHost" class="notification-host" aria-live="assertive"></div>
+                                </div>
+
+                                <div class="field-group">
+                                    <label class="field-label" for="ctl00_MainContent_txtZip">
+                                        ZIP Code <span style="color:#cc0000">*</span>
+                                    </label>
+                                    <div id="ctl00_MainContent_txtZip_EnhancedInput" class="enhanced-input">
+                                        <input id="ctl00_MainContent_txtZip"
+                                            name="ctl00$MainContent$txtZip"
+                                            class="enhanced-input-native" type="text"
+                                            placeholder="00000" maxlength="10"
+                                            aria-describedby="ctl00_MainContent_txtZip_NotificationHost">
+                                    </div>
+                                    <div id="ctl00_MainContent_txtZip_NotificationHost" class="notification-host" aria-live="assertive"></div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-grid" style="margin-bottom:20px;">
+
+                                <div class="field-group">
+                                    <label class="field-label" for="ctl00_MainContent_txtCounty">
+                                        County / Parish
+                                        <span class="loading-text" id="CountyLoader">&#9696; loading…</span>
+                                    </label>
+                                    <div class="enhanced-input">
+                                        <input id="ctl00_MainContent_txtCounty"
+                                            name="ctl00$MainContent$txtCounty"
+                                            class="enhanced-input-native field-readonly" type="text"
+                                            placeholder="Auto-filled from ZIP" readonly>
+                                    </div>
+                                    <div class="notification-host" aria-live="polite"></div>
+                                </div>
+
+                                <div class="field-group">
+                                    <label class="field-label" for="ctl00_MainContent_txtEffectiveDate">
+                                        Effective Date <span style="color:#cc0000">*</span>
+                                    </label>
+                                    <div id="ctl00_MainContent_txtEffectiveDate_DateWrapper" class="date-input-wrapper">
+                                        <input id="ctl00_MainContent_txtEffectiveDate"
+                                            name="ctl00$MainContent$txtEffectiveDate"
+                                            type="text" placeholder="MM/DD/YYYY"
+                                            readonly
+                                            aria-describedby="ctl00_MainContent_txtEffectiveDate_NotificationHost"
+                                            style="cursor:pointer;"
+                                            onclick="openDatePicker();">
+                                        <button type="button" class="calendar-icon-btn"
+                                            id="ctl00_MainContent_CalendarIcon"
+                                            aria-label="Open date picker"
+                                            onclick="openDatePicker();">
+                                            &#128197;
+                                        </button>
+                                    </div>
+                                    <div id="ctl00_MainContent_txtEffectiveDate_NotificationHost" class="notification-host" aria-live="assertive"></div>
+                                </div>
+
+                            </div>
+
+                            <div style="margin-bottom:20px;">
+                                <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#5a6a7a;margin-bottom:6px;">
+                                    Address Type <span style="color:#cc0000">*</span>
+                                </div>
+                                <div class="radio-group" id="ctl00_MainContent_rblAddressType" role="radiogroup">
+                                    <label class="radio-option">
+                                        <input type="radio" name="ctl00$MainContent$rblAddressType" value="Mailing" id="ctl00_MainContent_rblAddressType_0">
+                                        Mailing Address
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="ctl00$MainContent$rblAddressType" value="Property" id="ctl00_MainContent_rblAddressType_1">
+                                        Property Address
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="ctl00$MainContent$rblAddressType" value="Both" id="ctl00_MainContent_rblAddressType_2">
+                                        Both
+                                    </label>
+                                </div>
+                                <div id="ctl00_MainContent_rblAddressType_NotificationHost" class="notification-host" aria-live="assertive"></div>
+                            </div>
+
+                            <div style="margin-bottom:20px;">
+                                <input type="button"
+                                    name="ctl00$MainContent$btnValidateAddress"
+                                    id="ctl00_MainContent_btnValidateAddress"
+                                    value="Validate Address"
+                                    class="enhanced-button secondary-button"
+                                    style="padding:8px 18px;font-size:13px;"
+                                    onclick="validateAddress();">
+                                <span id="AddressValidatedBadge" style="display:none;margin-left:12px;font-size:13px;color:#2d7a2d;font-weight:700;">
+                                    ✔ Address validated
+                                </span>
+                            </div>
+
+                        </div>
+
+                        <!-- Non-address change type message -->
+                        <div id="OtherChangeMessage" style="display:none;">
+                            <div style="background:#f0f4fa;border-left:4px solid #0066cc;padding:14px 16px;font-size:13px;color:#1a3a5c;line-height:1.6;">
+                                This change type requires direct carrier involvement and cannot be submitted through the portal. Please contact your carrier representative or call the Producer Helpline at <strong>1-800-555-0199</strong>.
+                            </div>
+                        </div>
+
+                        <div class="btn-row" id="Step2BtnRow">
+                            <input type="button"
+                                name="ctl00$MainContent$Wizard1$StepNavigationTemplateContainerID$NextButton"
+                                id="ctl00_MainContent_Wizard1_StepNavigationTemplateContainerID_NextButton"
+                                value="Next ›"
+                                class="enhanced-button primary-button"
+                                id="Step2NextBtn"
+                                onclick="step2Next();">
+                            <input type="button"
+                                name="ctl00$MainContent$Wizard1$StepNavigationTemplateContainerID$PreviousButton"
+                                id="ctl00_MainContent_Wizard1_StepNavigationTemplateContainerID_PreviousButton"
+                                value="‹ Back"
+                                class="enhanced-button secondary-button"
+                                onclick="step2Back();">
+                        </div>
+                    </div>
+
+                    <!-- ════ STEP 3 ════ -->
+                    <div id="WizardStep3" class="wizard-content">
+                        <div class="form-section-title">Review Your Change Request</div>
+
+                        <table class="review-table" id="ctl00_MainContent_ReviewTable">
+                            <tbody>
+                                <tr><td>Policy Number</td>  <td id="rv_policy">—</td></tr>
+                                <tr><td>Insured</td>         <td id="rv_insured">—</td></tr>
+                                <tr><td>Change Type</td>     <td id="rv_changeType">—</td></tr>
+                                <tr><td>Address Line 1</td>  <td id="rv_addr1">—</td></tr>
+                                <tr><td>Address Line 2</td>  <td id="rv_addr2">—</td></tr>
+                                <tr><td>City</td>            <td id="rv_city">—</td></tr>
+                                <tr><td>State</td>           <td id="rv_state">—</td></tr>
+                                <tr><td>ZIP Code</td>        <td id="rv_zip">—</td></tr>
+                                <tr><td>County / Parish</td> <td id="rv_county">—</td></tr>
+                                <tr><td>Address Type</td>    <td id="rv_addrType">—</td></tr>
+                                <tr><td>Effective Date</td>  <td id="rv_effective">—</td></tr>
+                            </tbody>
+                        </table>
+
+                        <div class="confirm-checkbox-row">
+                            <input type="checkbox"
+                                name="ctl00$MainContent$chkConfirm"
+                                id="ctl00_MainContent_chkConfirm"
+                                onchange="toggleSubmit();">
+                            <label for="ctl00_MainContent_chkConfirm">
+                                I confirm that the information above is accurate and that I am authorized to submit this endorsement on behalf of the insured. I understand that this change may result in a premium adjustment.
+                            </label>
+                        </div>
+
+                        <div class="btn-row">
+                            <input type="button"
+                                name="ctl00$MainContent$Wizard1$FinishNavigationTemplateContainerID$FinishButton"
+                                id="ctl00_MainContent_Wizard1_FinishNavigationTemplateContainerID_FinishButton"
+                                value="Submit Request"
+                                class="enhanced-button primary-button"
+                                disabled
+                                onclick="submitRequest(this);">
+                            <input type="button"
+                                name="ctl00$MainContent$Wizard1$FinishNavigationTemplateContainerID$PreviousButton"
+                                id="ctl00_MainContent_Wizard1_FinishNavigationTemplateContainerID_PreviousButton"
+                                value="‹ Back"
+                                class="enhanced-button secondary-button"
+                                onclick="step3Back();">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- Date picker modal -->
+    <div class="modal-wrapper" id="DatePickerModal_Wrapper" style="display:none;">
+        <div class="modal modal-sm" id="DatePickerModal" role="dialog" aria-modal="true" aria-labelledby="DatePickerModal_Header">
+            <div id="header-holder">
+                <h2 class="modal-header-text" id="DatePickerModal_Header">Select Effective Date</h2>
+                <div class="modal-close">
+                    <button class="close-button" type="button" aria-label="Close" onclick="closeDatePicker();">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path d="M 19.3 17.5 l -1.9 1.9 L 10 11.9 l -7.5 7.5 l -1.9 -1.9 L 8.1 10 L 0.7 2.5 l 1.9 -1.9 L 10 8.1 l 7.5 -7.5 l 1.9 1.9 L 11.9 10 L 19.3 17.5 Z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-content">
+                <p style="font-size:13px;color:#5a6a7a;margin-top:0;">Changes take effect on or after today. Backdating is not permitted.</p>
+                <div class="date-picker-modal-content">
+                    <select id="dp_month" aria-label="Month">
+                        <option value="">Month</option>
+                        <option value="01">January</option><option value="02">February</option>
+                        <option value="03">March</option><option value="04">April</option>
+                        <option value="05">May</option><option value="06">June</option>
+                        <option value="07">July</option><option value="08">August</option>
+                        <option value="09">September</option><option value="10">October</option>
+                        <option value="11">November</option><option value="12">December</option>
+                    </select>
+                    <select id="dp_day" aria-label="Day">
+                        <option value="">Day</option>
+                    </select>
+                    <select id="dp_year" aria-label="Year">
+                        <option value="">Year</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="enhanced-button secondary-button" style="padding:8px 16px;font-size:13px;" onclick="closeDatePicker();">
+                    <span class="enhanced-button-text">Cancel</span>
+                </button>
+                <button type="button" class="enhanced-button primary-button" id="DatePickerApplyBtn" style="padding:8px 16px;font-size:13px;" onclick="applyDate();">
+                    <span class="enhanced-button-text">Apply</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Address validation modal -->
+    <div class="modal-wrapper" id="AddressValidationModal_Wrapper" style="display:none;">
+        <div class="modal" id="AddressValidationModal" role="dialog" aria-modal="true" aria-labelledby="AddrValidModal_Header">
+            <div id="header-holder">
+                <h2 class="modal-header-text" id="AddrValidModal_Header">Address Verification</h2>
+                <div class="modal-close">
+                    <button class="close-button" type="button" aria-label="Close" onclick="closeAddrModal();">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path d="M 19.3 17.5 l -1.9 1.9 L 10 11.9 l -7.5 7.5 l -1.9 -1.9 L 8.1 10 L 0.7 2.5 l 1.9 -1.9 L 10 8.1 l 7.5 -7.5 l 1.9 1.9 L 11.9 10 L 19.3 17.5 Z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-content">
+                <p style="font-size:13px;margin-top:0;">We found a USPS-standardized version of this address. Select which version to use:</p>
+                <div class="addr-option-grid">
+                    <div class="addr-option" id="AddrOriginal" onclick="selectAddr('original')">
+                        <div class="addr-option-label">As Entered</div>
+                        <div class="addr-option-text" id="AddrOriginalText"></div>
+                    </div>
+                    <div class="addr-option" id="AddrSuggested" onclick="selectAddr('suggested')">
+                        <div class="addr-option-label">USPS Suggested</div>
+                        <div class="addr-option-text" id="AddrSuggestedText"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="enhanced-button primary-button"
+                    id="AddrModalConfirmBtn" style="padding:8px 18px;font-size:13px;"
+                    disabled onclick="confirmAddrSelection();">
+                    <span class="enhanced-button-text">Use Selected Address</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    //<![CDATA[
+
+    /* ── Policy data ── */
+    var policies = {
+        'SNI-A-0045123': { insured: 'Johnson, Margaret A.', type: 'Auto',   status: 'Active' },
+        'SNI-H-0045124': { insured: 'Johnson, Margaret A.', type: 'Home',   status: 'Active' },
+        'SNI-A-0067890': { insured: 'Johnson, Thomas R.',   type: 'Auto',   status: 'Active' },
+        'SNI-L-0012345': { insured: 'Ramirez, Carlos E.',   type: 'Life',   status: 'Active' },
+        'SNI-A-0078901': { insured: 'Williams, Denise L.',  type: 'Auto',   status: 'Cancelled' },
+        'SNI-H-0089012': { insured: 'Thompson, Robert J.',  type: 'Home',   status: 'Expired' },
+        'SNI-A-0034567': { insured: 'Davis, James K.',      type: 'Auto',   status: 'Pending' },
+    };
+
+    var zipCounty = {
+        '32801': 'Orange County', '32802': 'Orange County', '32803': 'Orange County',
+        '33602': 'Hillsborough County', '33603': 'Hillsborough County',
+        '30309': 'Fulton County', '30301': 'Fulton County',
+        '28202': 'Mecklenburg County', '28201': 'Mecklenburg County',
+        '29403': 'Charleston County', '29401': 'Charleston County',
+        '77098': 'Harris County', '77001': 'Harris County',
+        '10001': 'New York County', '90210': 'Los Angeles County',
+    };
+
+    var policyNum = '', currentPolicy = null;
+    var addrValidated = false, selectedAddrType = null;
+    var changeTypeLabel = '';
+
+    /* init from URL */
+    (function() {
+        var params = new URLSearchParams(window.location.search);
+        policyNum = params.get('policy') || '';
+        currentPolicy = policies[policyNum];
+        if (currentPolicy) {
+            document.getElementById('BreadcrumbPolicy').textContent = policyNum;
+            document.getElementById('InfoPolicyNumber').textContent = policyNum;
+            document.getElementById('InfoInsured').textContent     = currentPolicy.insured;
+            document.getElementById('InfoType').textContent        = currentPolicy.type;
+            document.getElementById('InfoStatus').textContent      = currentPolicy.status;
+        }
+    })();
+
+    /* ── Step 1 → Step 2 ── */
+    function step1Next() {
+        var sel  = document.getElementById('ctl00_MainContent_ddlChangeType');
+        var host = document.getElementById('ctl00_MainContent_ddlChangeType_NotificationHost');
+        var wrap = document.getElementById('ctl00_MainContent_ddlChangeType_EnhancedInput');
+        if (!sel.value) {
+            host.innerHTML = '<span class="field-validation-error">Please select a change type.</span>';
+            wrap.classList.add('has-error');
+            return;
+        }
+        host.innerHTML = '';
+        wrap.classList.remove('has-error');
+
+        var changeTypeMap = {
+            'AddressChange':       'Address Change',
+            'NameCorrection':      'Insured Name Correction',
+            'VehicleChange':       'Vehicle Change',
+            'CoverageAdjustment':  'Coverage Adjustment',
+            'LienholderUpdate':    'Lienholder Update',
+        };
+        changeTypeLabel = changeTypeMap[sel.value] || sel.value;
+
+        /* show/hide address form vs. other message */
+        var isAddress = (sel.value === 'AddressChange');
+        document.getElementById('AddressChangeFields').style.display = isAddress ? '' : 'none';
+        document.getElementById('OtherChangeMessage').style.display  = isAddress ? 'none' : '';
+
+        goToStep(2);
+    }
+
+    /* ── Step 2 validation & Next ── */
+    function step2Next() {
+        var isAddress = document.getElementById('AddressChangeFields').style.display !== 'none';
+        if (!isAddress) { goToStep(3); populateReview(); return; }
+
+        var vs     = document.getElementById('ctl00_MainContent_ValidationSummary1');
+        var vsList = document.getElementById('ctl00_MainContent_ValidationSummary1_List');
+        var errors = [];
+
+        function fErr(inputId, hostId, wrapId, msg) {
+            var el   = document.getElementById(inputId);
+            var host = document.getElementById(hostId);
+            var wrap = wrapId ? document.getElementById(wrapId) : null;
+            if (!el || !el.value.trim()) {
+                errors.push(msg);
+                if (host) host.innerHTML = '<span class="field-validation-error">' + msg + '</span>';
+                if (wrap) wrap.classList.add('has-error');
+            } else {
+                if (host) host.innerHTML = '';
+                if (wrap) wrap.classList.remove('has-error');
+            }
+        }
+
+        fErr('ctl00_MainContent_txtAddress1', 'ctl00_MainContent_txtAddress1_NotificationHost',
+             'ctl00_MainContent_txtAddress1_EnhancedInput', 'Address Line 1 is required.');
+        fErr('ctl00_MainContent_txtCity', 'ctl00_MainContent_txtCity_NotificationHost',
+             'ctl00_MainContent_txtCity_EnhancedInput', 'City is required.');
+
+        /* state */
+        var stateEl   = document.getElementById('ctl00_MainContent_ddlState');
+        var stateHost = document.getElementById('ctl00_MainContent_ddlState_NotificationHost');
+        var stateWrap = document.getElementById('ctl00_MainContent_ddlState_EnhancedInput');
+        if (!stateEl.value) {
+            errors.push('State is required.');
+            stateHost.innerHTML = '<span class="field-validation-error">State is required.</span>';
+            stateWrap.classList.add('has-error');
+        } else { stateHost.innerHTML = ''; stateWrap.classList.remove('has-error'); }
+
+        /* zip */
+        var zipEl   = document.getElementById('ctl00_MainContent_txtZip');
+        var zipHost = document.getElementById('ctl00_MainContent_txtZip_NotificationHost');
+        var zipWrap = document.getElementById('ctl00_MainContent_txtZip_EnhancedInput');
+        if (!/^\d{5}(-\d{4})?$/.test(zipEl.value.trim())) {
+            errors.push('A valid ZIP code is required.');
+            zipHost.innerHTML = '<span class="field-validation-error">Valid ZIP required.</span>';
+            zipWrap.classList.add('has-error');
+        } else { zipHost.innerHTML = ''; zipWrap.classList.remove('has-error'); }
+
+        /* effective date */
+        var effEl   = document.getElementById('ctl00_MainContent_txtEffectiveDate');
+        var effHost = document.getElementById('ctl00_MainContent_txtEffectiveDate_NotificationHost');
+        var effWrap = document.getElementById('ctl00_MainContent_txtEffectiveDate_DateWrapper');
+        if (!effEl.value.trim()) {
+            errors.push('Effective date is required.');
+            effHost.innerHTML = '<span class="field-validation-error">Effective date is required.</span>';
+            effWrap.classList.add('has-error');
+        } else { effHost.innerHTML = ''; effWrap.classList.remove('has-error'); }
+
+        /* address type radio */
+        var addrTypeChecked = document.querySelector('input[name="ctl00$MainContent$rblAddressType"]:checked');
+        var addrTypeHost    = document.getElementById('ctl00_MainContent_rblAddressType_NotificationHost');
+        if (!addrTypeChecked) {
+            errors.push('Address type selection is required.');
+            addrTypeHost.innerHTML = '<span class="field-validation-error">Select an address type.</span>';
+        } else { addrTypeHost.innerHTML = ''; }
+
+        /* address validation */
+        if (!addrValidated) {
+            errors.push('Please validate the address before continuing.');
+        }
+
+        if (errors.length > 0) {
+            vsList.innerHTML = errors.map(function(e) { return '<li>' + e + '</li>'; }).join('');
+            vs.classList.add('visible');
+            vs.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            return;
+        }
+
+        vs.classList.remove('visible');
+        populateReview();
+        goToStep(3);
+    }
+
+    /* ── Step 2 Back ── */
+    function step2Back() {
+        /* going back clears step 2 form data */
+        document.getElementById('ctl00_MainContent_txtAddress1').value     = '';
+        document.getElementById('ctl00_MainContent_txtAddress2').value     = '';
+        document.getElementById('ctl00_MainContent_txtCity').value         = '';
+        document.getElementById('ctl00_MainContent_ddlState').value        = '';
+        document.getElementById('ctl00_MainContent_txtZip').value          = '';
+        document.getElementById('ctl00_MainContent_txtCounty').value       = '';
+        document.getElementById('ctl00_MainContent_txtEffectiveDate').value = '';
+        document.querySelectorAll('input[name="ctl00$MainContent$rblAddressType"]').forEach(function(r) { r.checked = false; });
+        document.getElementById('ctl00_MainContent_ValidationSummary1').classList.remove('visible');
+        document.getElementById('AddressValidatedBadge').style.display = 'none';
+        addrValidated = false;
+        goToStep(1);
+    }
+
+    /* ── Step 3 Back (also clears step 2 data) ── */
+    function step3Back() {
+        document.getElementById('ctl00_MainContent_chkConfirm').checked = false;
+        document.getElementById('ctl00_MainContent_Wizard1_FinishNavigationTemplateContainerID_FinishButton').disabled = true;
+        goToStep(2);
+    }
+
+    /* ── Populate review table ── */
+    function populateReview() {
+        var addrType = (document.querySelector('input[name="ctl00$MainContent$rblAddressType"]:checked') || {}).value || '—';
+        document.getElementById('rv_policy').textContent    = policyNum;
+        document.getElementById('rv_insured').textContent   = currentPolicy ? currentPolicy.insured : '—';
+        document.getElementById('rv_changeType').textContent = changeTypeLabel;
+        document.getElementById('rv_addr1').textContent     = document.getElementById('ctl00_MainContent_txtAddress1').value;
+        document.getElementById('rv_addr2').textContent     = document.getElementById('ctl00_MainContent_txtAddress2').value || '—';
+        document.getElementById('rv_city').textContent      = document.getElementById('ctl00_MainContent_txtCity').value;
+        document.getElementById('rv_state').textContent     = document.getElementById('ctl00_MainContent_ddlState').value;
+        document.getElementById('rv_zip').textContent       = document.getElementById('ctl00_MainContent_txtZip').value;
+        document.getElementById('rv_county').textContent    = document.getElementById('ctl00_MainContent_txtCounty').value || '—';
+        document.getElementById('rv_addrType').textContent  = addrType;
+        document.getElementById('rv_effective').textContent = document.getElementById('ctl00_MainContent_txtEffectiveDate').value;
+    }
+
+    /* ── Toggle submit button based on checkbox ── */
+    function toggleSubmit() {
+        var checked = document.getElementById('ctl00_MainContent_chkConfirm').checked;
+        document.getElementById('ctl00_MainContent_Wizard1_FinishNavigationTemplateContainerID_FinishButton').disabled = !checked;
+    }
+
+    /* ── Submit ── */
+    function submitRequest(btn) {
+        btn.disabled = true;
+        btn.value    = 'Submitting…';
+
+        var params = new URLSearchParams();
+        params.set('policy',   policyNum);
+        params.set('insured',  currentPolicy ? currentPolicy.insured : '');
+        params.set('change',   changeTypeLabel);
+        params.set('addr1',    document.getElementById('ctl00_MainContent_txtAddress1').value);
+        params.set('addr2',    document.getElementById('ctl00_MainContent_txtAddress2').value);
+        params.set('city',     document.getElementById('ctl00_MainContent_txtCity').value);
+        params.set('state',    document.getElementById('ctl00_MainContent_ddlState').value);
+        params.set('zip',      document.getElementById('ctl00_MainContent_txtZip').value);
+
+        /* simulate processing delay before redirect */
+        setTimeout(function() {
+            window.location.href = 'submitted.html?' + params.toString();
+        }, 1500);
+    }
+
+    /* ── Wizard navigation ── */
+    function goToStep(n) {
+        [1, 2, 3].forEach(function(s) {
+            document.getElementById('WizardStep' + s).classList.toggle('active', s === n);
+            document.getElementById('Step' + s + 'Circle').className = 'step-circle' + (s < n ? ' completed' : s === n ? ' active' : '');
+            document.getElementById('Step' + s + 'Title').className  = 'step-title'  + (s < n ? ' completed' : s === n ? ' active' : '');
+        });
+        document.getElementById('Connector1').className = 'wizard-connector' + (n > 1 ? ' completed' : '');
+        document.getElementById('Connector2').className = 'wizard-connector' + (n > 2 ? ' completed' : '');
+        document.getElementById('WizardPanelHeader').textContent = 'Step ' + n + ' of 3 — ' +
+            ['Select Change Type', 'Change Details', 'Review & Submit'][n - 1];
+    }
+
+    /* ── ZIP → County auto-fill (fires on blur, ~800ms delay) ── */
+    document.getElementById('ctl00_MainContent_txtZip').addEventListener('blur', function() {
+        var zip = this.value.trim();
+        if (!/^\d{5}/.test(zip)) return;
+        var loader = document.getElementById('CountyLoader');
+        var countyEl = document.getElementById('ctl00_MainContent_txtCounty');
+        countyEl.value = '';
+        loader.classList.add('visible');
+        setTimeout(function() {
+            loader.classList.remove('visible');
+            countyEl.value = zipCounty[zip.substring(0, 5)] || '';
+        }, 820);
+    });
+
+    /* clear field errors on change */
+    ['ctl00_MainContent_txtAddress1','ctl00_MainContent_txtCity','ctl00_MainContent_txtZip'].forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) el.addEventListener('input', function() {
+            var host = document.getElementById(id + '_NotificationHost');
+            var wrap = document.getElementById(id + '_EnhancedInput');
+            if (host) host.innerHTML = '';
+            if (wrap) wrap.classList.remove('has-error');
+        });
+    });
+    document.getElementById('ctl00_MainContent_ddlState').addEventListener('change', function() {
+        document.getElementById('ctl00_MainContent_ddlState_NotificationHost').innerHTML = '';
+        document.getElementById('ctl00_MainContent_ddlState_EnhancedInput').classList.remove('has-error');
+    });
+
+    /* ── Date picker ── */
+    (function initDatePicker() {
+        var dayEl  = document.getElementById('dp_day');
+        var yearEl = document.getElementById('dp_year');
+        for (var d = 1; d <= 31; d++) {
+            var o = document.createElement('option');
+            o.value = String(d).padStart(2, '0');
+            o.textContent = d;
+            dayEl.appendChild(o);
+        }
+        var now = new Date();
+        for (var y = now.getFullYear(); y <= now.getFullYear() + 2; y++) {
+            var o2 = document.createElement('option');
+            o2.value = o2.textContent = y;
+            yearEl.appendChild(o2);
+        }
+    })();
+
+    function openDatePicker() {
+        document.getElementById('DatePickerModal_Wrapper').style.display = 'flex';
+    }
+
+    function closeDatePicker() {
+        document.getElementById('DatePickerModal_Wrapper').style.display = 'none';
+    }
+
+    function applyDate() {
+        var m = document.getElementById('dp_month').value;
+        var d = document.getElementById('dp_day').value;
+        var y = document.getElementById('dp_year').value;
+        if (!m || !d || !y) { alert('Please select a complete date.'); return; }
+        var effEl   = document.getElementById('ctl00_MainContent_txtEffectiveDate');
+        var effHost = document.getElementById('ctl00_MainContent_txtEffectiveDate_NotificationHost');
+        var effWrap = document.getElementById('ctl00_MainContent_txtEffectiveDate_DateWrapper');
+        effEl.value = m + '/' + d + '/' + y;
+        effHost.innerHTML = '';
+        effWrap.classList.remove('has-error');
+        closeDatePicker();
+    }
+
+    /* ── Address validation modal ── */
+    function validateAddress() {
+        var a1    = document.getElementById('ctl00_MainContent_txtAddress1').value.trim();
+        var a2    = document.getElementById('ctl00_MainContent_txtAddress2').value.trim();
+        var city  = document.getElementById('ctl00_MainContent_txtCity').value.trim();
+        var state = document.getElementById('ctl00_MainContent_ddlState').value;
+        var zip   = document.getElementById('ctl00_MainContent_txtZip').value.trim();
+
+        if (!a1 || !city || !state || !zip) {
+            alert('Please fill in all required address fields before validating.');
+            return;
+        }
+
+        /* build original text */
+        var orig = a1 + (a2 ? ', ' + a2 : '') + '\n' + city + ', ' + state + ' ' + zip;
+        /* build USPS-style suggestion (uppercase, abbreviations) */
+        var sugg = a1.toUpperCase().replace(/\bStreet\b/i,'ST').replace(/\bAvenue\b/i,'AVE')
+                      .replace(/\bDrive\b/i,'DR').replace(/\bLane\b/i,'LN')
+                      .replace(/\bRoad\b/i,'RD').replace(/\bBlvd\b/i,'BLVD') +
+                   (a2 ? '\n' + a2.toUpperCase() : '') +
+                   '\n' + city.toUpperCase() + ', ' + state + ' ' + zip;
+
+        document.getElementById('AddrOriginalText').innerText  = orig;
+        document.getElementById('AddrSuggestedText').innerText = sugg;
+        document.getElementById('AddrOriginal').classList.remove('selected');
+        document.getElementById('AddrSuggested').classList.remove('selected');
+        document.getElementById('AddrModalConfirmBtn').disabled = true;
+        selectedAddrType = null;
+
+        document.getElementById('AddressValidationModal_Wrapper').style.display = 'flex';
+    }
+
+    function selectAddr(type) {
+        selectedAddrType = type;
+        document.getElementById('AddrOriginal').classList.toggle('selected',   type === 'original');
+        document.getElementById('AddrSuggested').classList.toggle('selected',  type === 'suggested');
+        document.getElementById('AddrModalConfirmBtn').disabled = false;
+    }
+
+    function confirmAddrSelection() {
+        if (selectedAddrType === 'suggested') {
+            /* apply USPS suggestion back to fields */
+            var sugText = document.getElementById('AddrSuggestedText').innerText.split('\n');
+            document.getElementById('ctl00_MainContent_txtAddress1').value = sugText[0] || '';
+            var lastLine = sugText[sugText.length - 1] || '';
+            var match    = lastLine.match(/^(.+),\s+(\w{2})\s+(\d{5}(-\d{4})?)$/);
+            if (match) {
+                document.getElementById('ctl00_MainContent_txtCity').value  = match[1];
+                document.getElementById('ctl00_MainContent_ddlState').value = match[2];
+                document.getElementById('ctl00_MainContent_txtZip').value   = match[3];
+            }
+        }
+        addrValidated = true;
+        document.getElementById('AddressValidatedBadge').style.display = 'inline';
+        closeAddrModal();
+    }
+
+    function closeAddrModal() {
+        document.getElementById('AddressValidationModal_Wrapper').style.display = 'none';
+    }
+
+    //]]>
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="PageTitle">AxisPoint - Login to go to /search/policysearch.aspx</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Muli:wght@200;300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="site.css">
+    <style>
+        #header-holder { display: flex; justify-content: space-between; }
+    </style>
+</head>
+<body id="login-page" class="prelogin">
+
+    <header>
+        <div class="logo-text">Axis<span>Point</span> PPS</div>
+    </header>
+
+    <form method="post" action="./default.aspx?err=Expired&amp;dest=%2fsearch%2fpolicysearch.aspx" id="form1">
+        <div class="aspNetHidden">
+            <input type="hidden" name="__EVENTTARGET"   id="__EVENTTARGET"   value="">
+            <input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="">
+            <input type="hidden" name="__VIEWSTATE"     id="__VIEWSTATE"     value="hcMqr3A4WS+klNIV7bqFzYROQnJZRtL9HaxQUCkNwOsX7pMeDGVFBLJaqT2EbH9rKSqm3WCZPE8ATuGP3VPdpwlP7hEhU0+SRaNt/bTfXlyXW8RajzGCm1MqkF9IzR0DX64plWPQ8j+Ke12GiELXXMt/X0HJLbD4K/Wx+5lTQ0rVAQ==">
+        </div>
+
+        <script type="text/javascript">
+        //<![CDATA[
+        var theForm = document.forms['form1'];
+        if (!theForm) { theForm = document.form1; }
+        function __doPostBack(eventTarget, eventArgument) {
+            if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+                theForm.__EVENTTARGET.value  = eventTarget;
+                theForm.__EVENTARGUMENT.value = eventArgument;
+                /* intercepted — client-side only */
+                handleFormAction(eventTarget, eventArgument);
+            }
+        }
+        //]]>
+        </script>
+
+        <div class="aspNetHidden">
+            <input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="4F2D08A1">
+            <input type="hidden" name="__EVENTVALIDATION"   id="__EVENTVALIDATION"   value="DPMnkqVFwOkZjHNKv7tBRFJlQX48LmCi/Gx8pYnEZkWrABx0TgQrM9KjlE2VPRcstF3L4mKi9W">
+        </div>
+
+        <div id="login-container">
+            <div id="login-fields">
+                <h1>Welcome</h1>
+                <p class="title">Sign in to your <span class="bold">AxisPoint</span> account</p>
+
+                <div id="txtUserName_FormGroup" class="form-group enhanced-input-form-group">
+                    <div id="txtUserName_ControlGroup" class="control-group">
+                        <div id="txtUserName_EnhancedInput" class="enhanced-input">
+                            <input id="txtUserName" name="txtUserName"
+                                class="enhanced-input-native" type="text"
+                                aria-describedby="txtUserName_NotificationHost"
+                                placeholder="Username" autocomplete="username" value="">
+                        </div>
+                    </div>
+                    <div id="txtUserName_NotificationHost" class="notification-host" aria-live="assertive"></div>
+                </div>
+
+                <div id="txtPassword_FormGroup" class="form-group enhanced-input-form-group">
+                    <div id="txtPassword_ControlGroup" class="control-group">
+                        <div id="txtPassword_EnhancedInput" class="enhanced-input">
+                            <input id="txtPassword" name="txtPassword"
+                                class="enhanced-input-native" type="password"
+                                aria-describedby="txtPassword_NotificationHost txtPassword_SubText"
+                                placeholder="Password" autocomplete="current-password" value="">
+                            <div id="txtPassword_SubText" class="enhanced-input-sub-text">
+                                Remember, your password is case-sensitive.
+                            </div>
+                        </div>
+                    </div>
+                    <div id="txtPassword_NotificationHost" class="notification-host" aria-live="assertive"></div>
+                </div>
+
+                <a id="reset-password-link" href="Account/PasswordRecovery/RequestPasswordResetLink.aspx">
+                    Forgot password?
+                </a>
+
+                <input type="button" name="LoginButton" value="Sign In"
+                    onclick="this.disabled=true; loginSubmit(this);"
+                    id="LoginButton" title="Sign In"
+                    class="enhanced-button primary-button">
+            </div>
+
+            <p id="ErrorMessage" class="alert-message">
+                Your session has expired. Please sign in again.
+            </p>
+        </div>
+
+        <footer></footer>
+
+        <script type="text/javascript">
+        //<![CDATA[
+
+        function handleFormAction(target, arg) { /* no-op for other controls */ }
+
+        function loginSubmit(btn) {
+            var user = document.getElementById('txtUserName');
+            var pass = document.getElementById('txtPassword');
+            var err  = document.getElementById('ErrorMessage');
+            var uHost = document.getElementById('txtUserName_NotificationHost');
+            var pHost = document.getElementById('txtPassword_NotificationHost');
+            var uWrap = document.getElementById('txtUserName_EnhancedInput');
+            var pWrap = document.getElementById('txtPassword_EnhancedInput');
+
+            /* clear previous errors */
+            uHost.innerHTML = '';
+            pHost.innerHTML = '';
+            uWrap.classList.remove('has-error');
+            pWrap.classList.remove('has-error');
+
+            /* field-level validation fires after simulated roundtrip */
+            setTimeout(function() {
+                var valid = true;
+                if (!user.value.trim()) {
+                    uHost.innerHTML = '<span class="field-validation-error">Username is required.</span>';
+                    uWrap.classList.add('has-error');
+                    valid = false;
+                }
+                if (!pass.value) {
+                    pHost.innerHTML = '<span class="field-validation-error">Password is required.</span>';
+                    pWrap.classList.add('has-error');
+                    valid = false;
+                }
+                if (!valid) { btn.disabled = false; return; }
+
+                if (user.value === 'jsmith' && pass.value === 'Welcome1') {
+                    window.location.href = 'policy-search.html';
+                } else {
+                    err.textContent = 'The username or password you entered is incorrect.';
+                    err.style.display = 'block';
+                    pass.value = '';
+                    btn.disabled = false;
+                }
+            }, 850);
+        }
+
+        /* clear field error on input */
+        document.getElementById('txtUserName').addEventListener('input', function() {
+            document.getElementById('txtUserName_NotificationHost').innerHTML = '';
+            document.getElementById('txtUserName_EnhancedInput').classList.remove('has-error');
+        });
+        document.getElementById('txtPassword').addEventListener('input', function() {
+            document.getElementById('txtPassword_NotificationHost').innerHTML = '';
+            document.getElementById('txtPassword_EnhancedInput').classList.remove('has-error');
+        });
+
+        //]]>
+        </script>
+
+    </form>
+
+    <!-- Browser-compatibility modal (matching reference pattern) -->
+    <div class="modal-wrapper" id="PopupMessage_ModalWrapper" style="display: none;">
+        <div tabindex="0" class="modal modal-sm" id="PopupMessage" role="dialog"
+            aria-describedby="PopupMessageText"
+            aria-labelledby="PopupMessage_ModalHeaderText"
+            aria-modal="true">
+            <div id="header-holder">
+                <h2 class="modal-header-text" id="PopupMessage_ModalHeaderText">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" style="fill:#cc0000;flex-shrink:0"><circle cx="10" cy="10" r="9" fill="#cc0000"/><text x="10" y="15" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">!</text></svg>
+                    Please update your browser.
+                </h2>
+                <div class="modal-close">
+                    <button name="PopupMessage$CloseButton" class="close-button"
+                        id="PopupMessage_CloseButton" aria-label="Close dialog" type="button"
+                        onclick="document.getElementById('PopupMessage_ModalWrapper').style.display='none'">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path d="M 19.3 17.5 l -1.9 1.9 L 10 11.9 l -7.5 7.5 l -1.9 -1.9 L 8.1 10 L 0.7 2.5 l 1.9 -1.9 L 10 8.1 l 7.5 -7.5 l 1.9 1.9 L 11.9 10 L 19.3 17.5 Z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-content" id="PopupMessage_ModalContent">
+                <div id="PopupMessageText">
+                    We no longer support this browser. Updating to Chrome or Edge will ensure full access to all portal functionality.
+                </div>
+            </div>
+            <div class="modal-footer" id="PopupMessage_ModalFooter">
+                <span class="cell">
+                    <button name="PopupMessage$PrimaryButton"
+                        class="enhanced-button primary-button" id="PopupMessage_PrimaryButton"
+                        type="button"
+                        onclick="document.getElementById('PopupMessage_ModalWrapper').style.display='none'">
+                        <span class="enhanced-button-text">Close This Message</span>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

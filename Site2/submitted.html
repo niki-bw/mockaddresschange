@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Request Submitted — AxisPoint PPS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Muli:wght@200;300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="site.css">
+</head>
+<body class="portal-page">
+
+    <header class="site-header">
+        <div class="logo-text">Axis<span>Point</span> PPS</div>
+        <div class="header-right">
+            <span class="session-timer" id="SessionTimer" title="Session time remaining">Session: 05:00</span>
+            <div class="header-user">
+                Logged in as <span>jsmith</span>
+                <a href="login.html">Sign Out</a>
+            </div>
+        </div>
+    </header>
+
+    <nav class="nav-tabs-bar">
+        <a href="policy-search.html" class="nav-tab active">Policies</a>
+        <a href="#" class="nav-tab">Billing</a>
+        <a href="#" class="nav-tab">Documents</a>
+        <a href="#" class="nav-tab">Reports</a>
+        <a href="#" class="nav-tab">Admin</a>
+    </nav>
+
+    <form method="post" action="./policy/endorsement-submitted.aspx" id="form1">
+        <div class="aspNetHidden">
+            <input type="hidden" name="__EVENTTARGET"   id="__EVENTTARGET"   value="">
+            <input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="">
+            <input type="hidden" name="__VIEWSTATE"     id="__VIEWSTATE"     value="VmZ3xRK8pQ4nY2lAJeT6hF0dOsC1bGwNiX9uE7rMoW5yHkBjPLtSaUcD3IqXzF+8eTvJrP4kNhBmQ2WoG0yEL7dSxC5AzKn1OuI=">
+        </div>
+
+        <div class="main-wrapper">
+            <div style="font-size:12px;color:#5a6a7a;margin-bottom:14px;">
+                <a href="policy-search.html" style="color:#0066cc;text-decoration:none;">Policy Search</a>
+                <span style="margin:0 6px;">›</span>
+                <a id="BreadcrumbPolicyLink" href="#" style="color:#0066cc;text-decoration:none;">—</a>
+                <span style="margin:0 6px;">›</span>
+                <span>Request Submitted</span>
+            </div>
+
+            <h1 class="page-heading">Endorsement Request Submitted</h1>
+
+            <!-- Confirmation card -->
+            <div class="confirm-card">
+                <div class="confirm-card-header">Confirmation</div>
+                <div class="confirm-card-body">
+                    <div style="font-size:14px;color:#333;margin-bottom:8px;">Your request has been submitted.</div>
+                    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#5a6a7a;margin-bottom:4px;">Confirmation Number</div>
+                    <div class="ref-number-display" id="ctl00_MainContent_lblConfirmation">—</div>
+
+                    <div style="margin-bottom:16px;">
+                        <span class="status-processing">
+                            <span class="status-spinner"></span>
+                            <span id="ctl00_MainContent_lblStatus">Processing</span>
+                        </span>
+                    </div>
+
+                    <div class="stale-banner">
+                        &#9432;&ensp;Changes are queued for processing and may take <strong>1–3 business days</strong> to reflect in policy records. No further action is required.
+                    </div>
+
+                    <table class="detail-table" id="ctl00_MainContent_ConfirmationTable">
+                        <tbody>
+                            <tr><td>Policy Number</td>    <td id="ct_policy">—</td></tr>
+                            <tr><td>Insured</td>           <td id="ct_insured">—</td></tr>
+                            <tr><td>Change Type</td>       <td id="ct_change">—</td></tr>
+                            <tr><td>Submitted By</td>      <td>jsmith</td></tr>
+                            <tr><td>Submission Date/Time</td><td id="ct_timestamp">—</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Address on file (intentionally shows OLD address, not the new one) -->
+            <div class="confirm-card">
+                <div class="confirm-card-header">Address Currently on File</div>
+                <div class="confirm-card-body">
+                    <div class="stale-banner" style="border-left-color:#f0c040;background:#fff8e1;color:#6b5300;">
+                        &#9888;&ensp;The address shown below reflects the <strong>current system record</strong>. Your requested change is pending and has not yet been applied.
+                    </div>
+                    <table class="detail-table">
+                        <tbody>
+                            <tr><td>Street</td>  <td id="ctl00_MainContent_lblCurrentAddress1">—</td></tr>
+                            <tr><td>City</td>    <td id="ctl00_MainContent_lblCurrentCity">—</td></tr>
+                            <tr><td>State</td>   <td id="ctl00_MainContent_lblCurrentState">—</td></tr>
+                            <tr><td>ZIP</td>     <td id="ctl00_MainContent_lblCurrentZip">—</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div style="display:flex;gap:12px;align-items:center;">
+                <a href="policy-search.html"
+                    class="enhanced-button primary-button"
+                    style="text-decoration:none;padding:10px 22px;font-size:13px;">
+                    <span class="enhanced-button-text">Return to Policy Search</span>
+                </a>
+                <input type="button"
+                    name="ctl00$MainContent$btnPrint"
+                    id="ctl00_MainContent_btnPrint"
+                    value="Print Confirmation"
+                    class="enhanced-button secondary-button"
+                    style="padding:10px 22px;font-size:13px;"
+                    onclick="window.print();">
+                <a href="#" id="ctl00_MainContent_lnkNewRequest"
+                    style="font-size:13px;color:#0066cc;">
+                    Submit Another Change
+                </a>
+            </div>
+        </div>
+    </form>
+
+    <!-- Session timeout modal (appears after countdown reaches 0) -->
+    <div class="modal-wrapper" id="PopupTimeout_ModalWrapper" style="display:none;">
+        <div tabindex="0" class="modal modal-sm" id="PopupTimeout"
+            role="dialog" aria-modal="true"
+            aria-labelledby="PopupTimeout_ModalHeaderText"
+            aria-describedby="PopupTimeoutText">
+            <div id="header-holder">
+                <h2 class="modal-header-text" id="PopupTimeout_ModalHeaderText">
+                    Session Expiring
+                </h2>
+            </div>
+            <div class="modal-content">
+                <div id="PopupTimeoutText">
+                    Your session will expire due to inactivity. Click <strong>Stay Signed In</strong> to continue, or you will be signed out automatically.
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span class="cell">
+                    <button name="PopupTimeout$SecondaryButton"
+                        class="enhanced-button secondary-button" style="padding:9px 16px;font-size:13px;"
+                        id="PopupTimeout_SecondaryButton" type="button"
+                        onclick="window.location.href='login.html'">
+                        <span class="enhanced-button-text">Sign Out</span>
+                    </button>
+                </span>
+                <span class="cell">
+                    <button name="PopupTimeout$PrimaryButton"
+                        class="enhanced-button primary-button" style="padding:9px 16px;font-size:13px;"
+                        id="PopupTimeout_PrimaryButton" type="button"
+                        onclick="resetSession();">
+                        <span class="enhanced-button-text">Stay Signed In</span>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    //<![CDATA[
+
+    var policyData = {
+        'SNI-A-0045123': { insured: 'Johnson, Margaret A.', street: '4821 Riverside Dr', city: 'Orlando', state: 'FL', zip: '32801' },
+        'SNI-H-0045124': { insured: 'Johnson, Margaret A.', street: '4821 Riverside Dr', city: 'Orlando', state: 'FL', zip: '32801' },
+        'SNI-A-0067890': { insured: 'Johnson, Thomas R.',   street: '990 Lakeview Ave',  city: 'Orlando', state: 'FL', zip: '32801' },
+        'SNI-L-0012345': { insured: 'Ramirez, Carlos E.',   street: '109 Magnolia Ln',   city: 'Tampa',   state: 'FL', zip: '33602' },
+        'SNI-A-0078901': { insured: 'Williams, Denise L.',  street: '2200 Peachtree Rd NE', city: 'Atlanta', state: 'GA', zip: '30309' },
+        'SNI-H-0089012': { insured: 'Thompson, Robert J.',  street: '814 Oak Street',    city: 'Charlotte', state: 'NC', zip: '28202' },
+        'SNI-A-0034567': { insured: 'Davis, James K.',      street: '501 Meeting St',    city: 'Charleston', state: 'SC', zip: '29403' },
+    };
+
+    (function init() {
+        var params  = new URLSearchParams(window.location.search);
+        var policy  = params.get('policy') || '';
+        var insured = params.get('insured') || '';
+        var change  = params.get('change') || 'Address Change';
+        var pd      = policyData[policy] || {};
+
+        /* breadcrumb */
+        var bcLink = document.getElementById('BreadcrumbPolicyLink');
+        bcLink.textContent = policy || '—';
+        bcLink.href = 'endorsement.html?policy=' + encodeURIComponent(policy);
+
+        /* confirmation number: AX- + date + random 6 digits */
+        var now   = new Date();
+        var ds    = (now.getFullYear()) + '' +
+                    String(now.getMonth()+1).padStart(2,'0') +
+                    String(now.getDate()).padStart(2,'0');
+        var confNum = 'AX-' + ds + '-' + Math.floor(100000 + Math.random() * 900000);
+        document.getElementById('ctl00_MainContent_lblConfirmation').textContent = confNum;
+
+        /* detail table */
+        document.getElementById('ct_policy').textContent    = policy || '—';
+        document.getElementById('ct_insured').textContent   = insured || pd.insured || '—';
+        document.getElementById('ct_change').textContent    = change || '—';
+        var ts = (now.getMonth()+1).toString().padStart(2,'0') + '/' +
+                 now.getDate().toString().padStart(2,'0') + '/' +
+                 now.getFullYear() + ' ' +
+                 now.toLocaleTimeString('en-US', { hour:'2-digit', minute:'2-digit' });
+        document.getElementById('ct_timestamp').textContent = ts;
+
+        /* old address (intentionally stale — shows record before change) */
+        document.getElementById('ctl00_MainContent_lblCurrentAddress1').textContent = pd.street || '—';
+        document.getElementById('ctl00_MainContent_lblCurrentCity').textContent     = pd.city   || '—';
+        document.getElementById('ctl00_MainContent_lblCurrentState').textContent    = pd.state  || '—';
+        document.getElementById('ctl00_MainContent_lblCurrentZip').textContent      = pd.zip    || '—';
+
+        /* "Submit Another Change" link */
+        document.getElementById('ctl00_MainContent_lnkNewRequest').href =
+            'endorsement.html?policy=' + encodeURIComponent(policy);
+    })();
+
+    /* ── Session countdown (5 minutes; modal at 0) ── */
+    var SESSION_SECONDS = 300;
+    var sessionRemaining = SESSION_SECONDS;
+    var timerEl = document.getElementById('SessionTimer');
+
+    function formatTime(s) {
+        var m = Math.floor(s / 60);
+        var sec = s % 60;
+        return 'Session: ' + String(m).padStart(2,'0') + ':' + String(sec).padStart(2,'0');
+    }
+
+    function resetSession() {
+        sessionRemaining = SESSION_SECONDS;
+        timerEl.className = 'session-timer';
+        timerEl.textContent = formatTime(sessionRemaining);
+        document.getElementById('PopupTimeout_ModalWrapper').style.display = 'none';
+    }
+
+    var countdown = setInterval(function() {
+        sessionRemaining--;
+        timerEl.textContent = formatTime(sessionRemaining);
+        if (sessionRemaining <= 60 && sessionRemaining > 30) {
+            timerEl.className = 'session-timer warning';
+        } else if (sessionRemaining <= 30) {
+            timerEl.className = 'session-timer critical';
+        }
+        if (sessionRemaining <= 0) {
+            clearInterval(countdown);
+            document.getElementById('PopupTimeout_ModalWrapper').style.display = 'flex';
+        }
+    }, 1000);
+
+    /* reset on any user interaction */
+    ['mousemove','keydown','click','scroll'].forEach(function(ev) {
+        document.addEventListener(ev, function() {
+            if (sessionRemaining > 0) resetSession();
+        }, { passive: true });
+    });
+
+    //]]>
+    </script>
+
+</body>
+</html>
