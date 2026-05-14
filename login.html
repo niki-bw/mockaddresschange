@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Summit National Insurance</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 14px;
+      color: #333;
+    }
+
+    .login-wrapper {
+      min-height: 100dvh;
+      height: auto;
+      background: linear-gradient(135deg, #c8d8e8 0%, #a0b8cc 40%, #7896ac 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 25px 0;
+    }
+
+    @media (min-width: 769px) {
+      .login-wrapper {
+        align-items: start;
+        padding-top: 80px;
+      }
+    }
+
+    .login-content {
+      max-width: 330px;
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+      background-color: rgba(255, 255, 255, 0.88);
+      box-shadow: 0 3px 6px -3px #838383;
+      border-radius: 2px;
+    }
+
+    @media (min-width: 769px) {
+      .login-content {
+        max-width: 430px;
+      }
+    }
+
+    .login-top {
+      background: #838383;
+      padding: 5px 0 2px;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .login-top h1 {
+      color: #fff;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.4px;
+      margin: 0;
+    }
+
+    .login-body {
+      text-align: center;
+      padding: 40px;
+      border-bottom-left-radius: 2px;
+      border-bottom-right-radius: 2px;
+    }
+
+    .login-logo-text {
+      display: inline-block;
+      font-size: 22px;
+      font-weight: 700;
+      color: #4d6f8f;
+      letter-spacing: 1px;
+      margin: 10px 0 25px;
+      line-height: 1;
+    }
+
+    .login-logo-text span {
+      display: block;
+      font-size: 10px;
+      font-weight: 400;
+      color: #838383;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .login-body > h2 {
+      font-size: 13.5px;
+      font-weight: 300;
+      margin: 0 auto 15px;
+      color: #838383;
+      max-width: 320px;
+    }
+
+    .login-form {
+      width: 245px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .login-input {
+      position: relative;
+    }
+
+    .login-input input {
+      font-size: 14px;
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 9px 11px;
+      margin-bottom: 15px;
+      width: 100%;
+      outline: none;
+    }
+
+    .login-input input:focus {
+      border-color: #748eb4;
+    }
+
+    .login-input button {
+      width: 100%;
+      padding: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      border: none;
+      border-radius: 2px;
+      background-color: #5a9a6e;
+      color: #fff;
+      transition: background-color 0.2s ease;
+    }
+
+    .login-input button:hover:not(:disabled) {
+      background-color: #4a8a5e;
+    }
+
+    .login-input button:disabled {
+      background-color: #aaa;
+      cursor: default;
+    }
+
+    .btn-mfa {
+      width: 100%;
+      padding: 9px;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      border: 1px solid #748eb4;
+      border-radius: 2px;
+      background-color: #fff;
+      color: #4d6f8f;
+      margin-bottom: 12px;
+      transition: background-color 0.2s ease;
+    }
+
+    .btn-mfa:hover {
+      background-color: #f0f4f8;
+    }
+
+    .login-error {
+      color: #df7171;
+      font-size: 13px;
+      text-align: center;
+      margin-bottom: 10px;
+      display: none;
+    }
+
+    .login-error.visible {
+      display: block;
+    }
+
+    .login-info {
+      color: #748eb4;
+      font-size: 13px;
+      text-align: center;
+      margin-bottom: 10px;
+      display: none;
+    }
+
+    .login-info.visible {
+      display: block;
+    }
+
+    .login-link {
+      margin-top: 15px;
+    }
+
+    .login-link a {
+      text-transform: uppercase;
+      color: #838383;
+      font-size: 13px;
+      transition: color 0.2s ease-in-out;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .login-link a:hover,
+    .login-link a:focus {
+      color: #666;
+    }
+
+    .login-link.privacy-notice a {
+      color: #4f85d1;
+      text-transform: none;
+    }
+
+    .login-link.privacy-notice a:hover,
+    .login-link.privacy-notice a:focus {
+      color: #2a6496;
+    }
+
+    /* MFA step */
+    #mfa-step {
+      display: none;
+    }
+
+    #mfa-step.visible {
+      display: block;
+    }
+
+    #credentials-step.hidden {
+      display: none;
+    }
+
+    .mfa-label {
+      font-size: 13px;
+      color: #555;
+      margin-bottom: 12px;
+      text-align: left;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+<section class="login-wrapper">
+  <div>
+    <section class="login-content">
+      <article>
+        <div class="login-top">
+          <h1>Producer Login</h1>
+        </div>
+        <div class="login-body">
+          <div class="login-logo-text">
+            SUMMIT NATIONAL
+            <span>Insurance Portal</span>
+          </div>
+
+          <!-- Step 1: Credentials -->
+          <div id="credentials-step">
+            <h2>Please log in to access the carrier portal.</h2>
+
+            <div class="login-form">
+              <form id="login-form" novalidate>
+                <div class="login-input">
+                  <input
+                    id="username"
+                    name="username"
+                    type="text"
+                    placeholder="Username"
+                    autocomplete="username"
+                  />
+                </div>
+                <div class="login-input">
+                  <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    placeholder="Password"
+                    autocomplete="current-password"
+                  />
+                </div>
+
+                <div id="login-error" class="login-error">
+                  Invalid username or password.
+                </div>
+
+                <div class="login-input">
+                  <button
+                    id="login-btn"
+                    type="submit"
+                    aria-label="Log in to Summit National Insurance"
+                    disabled
+                  >
+                    Log In
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <div class="login-link">
+              <a id="forgot-password" aria-label="Click here to reset your password">Forgot password</a>
+            </div>
+            <div class="login-link privacy-notice">
+              <a id="privacy-notice" aria-label="Click here to read our privacy notice">Privacy notice</a>
+            </div>
+          </div>
+
+          <!-- Step 2: MFA (shown only when MFA is required) -->
+          <div id="mfa-step">
+            <h2>A verification code has been sent to your registered device.</h2>
+
+            <div class="login-form">
+              <div class="mfa-label">
+                Enter the 6-digit code to continue. If you did not receive a code, click <strong>Send MFA</strong>.
+              </div>
+
+              <form id="mfa-form" novalidate>
+                <div class="login-input">
+                  <input
+                    id="mfa-code"
+                    name="mfa_code"
+                    type="text"
+                    placeholder="6-digit code"
+                    maxlength="6"
+                    autocomplete="one-time-code"
+                  />
+                </div>
+
+                <div id="mfa-error" class="login-error">
+                  Incorrect code. Please try again.
+                </div>
+                <div id="mfa-info" class="login-info">
+                  A new code has been sent.
+                </div>
+
+                <div class="login-input" style="margin-bottom: 0;">
+                  <button id="verify-btn" type="submit" disabled>
+                    Verify
+                  </button>
+                </div>
+
+                <div style="margin-top: 12px;">
+                  <button id="send-mfa-btn" type="button" class="btn-mfa">
+                    Send MFA
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <div class="login-link">
+              <a id="back-to-login">← Back to login</a>
+            </div>
+          </div>
+
+        </div>
+      </article>
+    </section>
+  </div>
+</section>
+
+<script>
+  /* ── Credential step ── */
+  var usernameInput = document.getElementById('username');
+  var passwordInput = document.getElementById('password');
+  var loginBtn = document.getElementById('login-btn');
+  var loginError = document.getElementById('login-error');
+
+  function updateLoginBtn() {
+    loginBtn.disabled = !(usernameInput.value.trim() && passwordInput.value.length);
+  }
+
+  usernameInput.addEventListener('input', updateLoginBtn);
+  passwordInput.addEventListener('input', updateLoginBtn);
+
+  document.getElementById('login-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var username = usernameInput.value.trim();
+    var password = passwordInput.value;
+
+    if (username === 'agent' && password === 'demo123') {
+      loginError.classList.remove('visible');
+      /* ~40% chance MFA is required */
+      var needsMfa = Math.random() < 0.4;
+      if (needsMfa) {
+        document.getElementById('credentials-step').classList.add('hidden');
+        document.getElementById('mfa-step').classList.add('visible');
+      } else {
+        window.location.href = 'customer-lookup.html';
+      }
+    } else {
+      loginError.classList.add('visible');
+      passwordInput.value = '';
+      updateLoginBtn();
+    }
+  });
+
+  document.getElementById('forgot-password').addEventListener('click', function() {
+    alert('Please contact your agency administrator to reset your password.');
+  });
+
+  /* ── MFA step ── */
+  var mfaInput = document.getElementById('mfa-code');
+  var verifyBtn = document.getElementById('verify-btn');
+  var mfaError = document.getElementById('mfa-error');
+  var mfaInfo = document.getElementById('mfa-info');
+
+  mfaInput.addEventListener('input', function() {
+    verifyBtn.disabled = mfaInput.value.trim().length !== 6;
+    mfaError.classList.remove('visible');
+    mfaInfo.classList.remove('visible');
+  });
+
+  document.getElementById('mfa-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (mfaInput.value.trim() === '123456') {
+      window.location.href = 'customer-lookup.html';
+    } else {
+      mfaError.classList.add('visible');
+      mfaInfo.classList.remove('visible');
+      mfaInput.value = '';
+      verifyBtn.disabled = true;
+    }
+  });
+
+  document.getElementById('send-mfa-btn').addEventListener('click', function() {
+    mfaError.classList.remove('visible');
+    mfaInfo.classList.add('visible');
+  });
+
+  document.getElementById('back-to-login').addEventListener('click', function() {
+    document.getElementById('mfa-step').classList.remove('visible');
+    document.getElementById('credentials-step').classList.remove('hidden');
+    mfaInput.value = '';
+    verifyBtn.disabled = true;
+    mfaError.classList.remove('visible');
+    mfaInfo.classList.remove('visible');
+  });
+</script>
+
+</body>
+</html>

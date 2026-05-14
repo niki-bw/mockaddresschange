@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Request Submitted — Summit National Insurance</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 14px;
+      color: #333;
+      background: #f0f2f5;
+    }
+
+    /* ── Top nav ── */
+    .top-nav {
+      background: #4d6f8f;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      height: 48px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .top-nav .nav-brand {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    .top-nav .nav-brand span {
+      font-weight: 300;
+      opacity: 0.8;
+    }
+
+    .top-nav .nav-user {
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .top-nav .nav-user a {
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      transition: color 0.2s ease;
+    }
+
+    .top-nav .nav-user a:hover {
+      color: #fff;
+    }
+
+    /* ── Page layout ── */
+    .page-layout {
+      display: flex;
+      min-height: calc(100vh - 48px);
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      width: 195px;
+      background: #fff;
+      border-right: 1px solid #ddd;
+      padding-top: 20px;
+      flex-shrink: 0;
+    }
+
+    .sidebar nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .sidebar nav ul li a {
+      display: block;
+      padding: 10px 20px;
+      color: #555;
+      text-decoration: none;
+      font-size: 13px;
+      border-left: 3px solid transparent;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    .sidebar nav ul li a:hover {
+      background: #f5f7fa;
+      color: #333;
+    }
+
+    .sidebar nav ul li a.active {
+      border-left-color: #4d6f8f;
+      color: #4d6f8f;
+      font-weight: 600;
+      background: #f0f4f8;
+    }
+
+    .sidebar-section-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #aaa;
+      padding: 15px 20px 5px;
+    }
+
+    /* ── Main content ── */
+    .main-content {
+      flex: 1;
+      padding: 30px;
+    }
+
+    .breadcrumb {
+      font-size: 12px;
+      color: #838383;
+      margin-bottom: 15px;
+    }
+
+    .breadcrumb a {
+      color: #4d6f8f;
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    .breadcrumb span {
+      margin: 0 6px;
+    }
+
+    .page-title {
+      font-size: 18px;
+      font-weight: 400;
+      color: #4d6f8f;
+      margin: 0 0 5px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .page-subtitle {
+      font-size: 13px;
+      color: #838383;
+      margin: 0 0 25px;
+    }
+
+    /* ── Cards ── */
+    .card {
+      background: #fff;
+      border-radius: 2px;
+      box-shadow: 0 3px 6px -3px #838383;
+      margin-bottom: 20px;
+    }
+
+    .card-header {
+      background: #838383;
+      color: #fff;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      padding: 5px 15px 3px;
+      font-weight: 400;
+    }
+
+    .card-body {
+      padding: 20px 25px;
+    }
+
+    /* ── Submission banner ── */
+    .submission-banner {
+      background: #fff;
+      border-radius: 2px;
+      box-shadow: 0 3px 6px -3px #838383;
+      margin-bottom: 20px;
+      padding: 20px 25px;
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+    }
+
+    .submission-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #e8f0e9;
+      border: 2px solid #8ab88a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 18px;
+      color: #4a7a4a;
+    }
+
+    .submission-text h2 {
+      font-size: 15px;
+      font-weight: 600;
+      margin: 0 0 4px;
+      color: #333;
+    }
+
+    .submission-text p {
+      font-size: 13px;
+      color: #555;
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .confirmation-number {
+      font-family: monospace;
+      font-size: 13px;
+      background: #f5f7fa;
+      border: 1px solid #ddd;
+      padding: 2px 8px;
+      color: #333;
+      display: inline-block;
+      margin-top: 6px;
+    }
+
+    /* ── Status block ── */
+    .status-block {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .status-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #838383;
+      font-weight: 600;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 10px;
+      border-radius: 2px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .status-pending {
+      background: #fff8e1;
+      color: #8a6900;
+      border: 1px solid #f0c040;
+    }
+
+    .spinner {
+      width: 10px;
+      height: 10px;
+      border: 2px solid #f0c040;
+      border-top-color: #8a6900;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      display: inline-block;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ── Detail rows ── */
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px 30px;
+    }
+
+    .detail-field .field-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #838383;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .detail-field .field-value {
+      font-size: 14px;
+      color: #333;
+    }
+
+    /* ── Address comparison ── */
+    .address-comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .addr-col-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #838383;
+      font-weight: 600;
+      margin-bottom: 8px;
+      padding-bottom: 5px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .addr-col p {
+      margin: 0 0 3px;
+      font-size: 13px;
+      color: #444;
+      line-height: 1.6;
+    }
+
+    /* intentionally same — old address shown as "current" even after change */
+    .addr-col.old-address p {
+      color: #444;
+    }
+
+    .addr-col.new-address p {
+      color: #444;
+    }
+
+    /* ── Note ── */
+    .notice {
+      border-left: 3px solid #ccc;
+      background: #fafafa;
+      padding: 10px 14px;
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 14px;
+    }
+
+    .notice a {
+      color: #4d6f8f;
+      text-decoration: none;
+    }
+
+    .notice a:hover {
+      text-decoration: underline;
+    }
+
+    /* ── Actions ── */
+    .action-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 9px 20px;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      border: none;
+      border-radius: 2px;
+      transition: background-color 0.2s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background-color: #4d6f8f;
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background-color: #3d5f7f;
+    }
+
+    .btn-secondary {
+      background-color: #e0e0e0;
+      color: #555;
+    }
+
+    .btn-secondary:hover {
+      background-color: #d0d0d0;
+    }
+
+    .btn-link {
+      background: none;
+      color: #4d6f8f;
+      padding: 9px 0;
+      font-size: 13px;
+      cursor: pointer;
+      border: none;
+      text-decoration: underline;
+    }
+
+    .btn-link:hover {
+      color: #2a6496;
+    }
+
+    /* ── Address on file (intentionally stale) ── */
+    .stale-notice {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      background: #fdecea;
+      border-left: 3px solid #df7171;
+      padding: 10px 14px;
+      font-size: 13px;
+      color: #7a1a1a;
+      margin-bottom: 14px;
+    }
+  </style>
+</head>
+<body>
+
+<header class="top-nav">
+  <div class="nav-brand">Summit National <span>Insurance</span></div>
+  <div class="nav-user">
+    <span>Welcome, Demo Agent</span>
+    <a href="login.html">Log Out</a>
+  </div>
+</header>
+
+<div class="page-layout">
+  <aside class="sidebar">
+    <div class="sidebar-section-label">Policy Management</div>
+    <nav>
+      <ul>
+        <li><a href="customer-lookup.html" class="active">Customer Lookup</a></li>
+        <li><a href="#">Policy Summary</a></li>
+        <li><a href="#">Claims</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-section-label">Account</div>
+    <nav>
+      <ul>
+        <li><a href="#">Profile</a></li>
+        <li><a href="#">Reports</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main class="main-content">
+    <div class="breadcrumb">
+      <a href="customer-lookup.html">Customer Lookup</a>
+      <span>›</span>
+      <a id="breadcrumb-policy-link" href="#">—</a>
+      <span>›</span>
+      <span>Confirmation</span>
+    </div>
+
+    <h1 class="page-title">Request Submitted</h1>
+    <p class="page-subtitle">Your address change request has been received.</p>
+
+    <!-- Submission banner -->
+    <div class="submission-banner">
+      <div class="submission-icon">&#10003;</div>
+      <div class="submission-text">
+        <h2>Your request has been submitted.</h2>
+        <p>
+          Confirmation number: <span class="confirmation-number" id="conf-number">—</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Status -->
+    <div class="card">
+      <div class="card-header">Request Status</div>
+      <div class="card-body">
+        <div class="status-block">
+          <span class="status-label">Status</span>
+          <span class="status-badge status-pending">
+            <span class="spinner"></span>
+            Pending Review
+          </span>
+        </div>
+
+        <div class="notice">
+          This change is under review and may take <strong>1&ndash;3 business days</strong> to process.
+          No further action is required. You will not receive a separate confirmation email.
+          <br>
+          To check the current address on file, return to
+          <a href="customer-lookup.html">Customer Lookup</a>.
+        </div>
+
+        <div class="detail-grid">
+          <div class="detail-field">
+            <span class="field-label">Policy Number</span>
+            <span class="field-value" id="disp-policy">—</span>
+          </div>
+          <div class="detail-field">
+            <span class="field-label">Insured Name</span>
+            <span class="field-value" id="disp-name">—</span>
+          </div>
+          <div class="detail-field">
+            <span class="field-label">Submitted By</span>
+            <span class="field-value">Demo Agent</span>
+          </div>
+          <div class="detail-field">
+            <span class="field-label">Submitted At</span>
+            <span class="field-value" id="disp-timestamp">—</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Address on file (intentionally shows old address) -->
+    <div class="card">
+      <div class="card-header">Address on File</div>
+      <div class="card-body">
+
+        <div class="stale-notice">
+          &#9432;&nbsp; The address below reflects what is currently in the system. Changes may not be visible until processing is complete.
+        </div>
+
+        <div class="address-comparison">
+          <div class="addr-col old-address">
+            <div class="addr-col-title">Current (System)</div>
+            <!-- intentionally shows the old address, not the new one -->
+            <p id="old-street">—</p>
+            <p id="old-citystate">—</p>
+          </div>
+          <div class="addr-col new-address">
+            <div class="addr-col-title">Requested</div>
+            <p id="new-street">—</p>
+            <p id="new-citystate">—</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="action-row">
+      <a href="customer-lookup.html" class="btn btn-primary">Return to Customer Lookup</a>
+      <button class="btn-link" onclick="window.print()">Print Confirmation</button>
+    </div>
+  </main>
+</div>
+
+<script>
+  var customers = {
+    'SNI-00123456': { name: 'Johnson, Margaret A.', street: '4821 Riverside Dr', city: 'Orlando', state: 'FL', zip: '32801' },
+    'SNI-00234567': { name: 'Ramirez, Carlos E.',   street: '109 Magnolia Ln',   city: 'Tampa',   state: 'FL', zip: '33602' },
+    'SNI-00345678': { name: 'Williams, Denise L.',  street: '2200 Peachtree Rd NE', city: 'Atlanta', state: 'GA', zip: '30309' },
+    'SNI-00456789': { name: 'Thompson, Robert J.',  street: '814 Oak Street',    city: 'Charlotte', state: 'NC', zip: '28202' },
+    'SNI-00567890': { name: 'Johnson, Thomas R.',   street: '990 Lakeview Ave',  city: 'Orlando', state: 'FL', zip: '32801' },
+    'SNI-00678901': { name: 'Davis, James K.',      street: '501 Meeting St',    city: 'Charleston', state: 'SC', zip: '29403' },
+  };
+
+  function getParam(name) {
+    return new URLSearchParams(window.location.search).get(name) || '';
+  }
+
+  var policyNum = getParam('policy');
+  var customer  = customers[policyNum] || {};
+
+  /* Confirmation number: deterministic-looking random */
+  var confNum = 'SN' + (Math.floor(Math.random() * 9000000) + 1000000);
+  document.getElementById('conf-number').textContent = confNum;
+
+  /* Breadcrumb */
+  var bcLink = document.getElementById('breadcrumb-policy-link');
+  bcLink.textContent = policyNum || 'Policy';
+  bcLink.href = 'address-update.html?policy=' + encodeURIComponent(policyNum);
+
+  /* Policy info */
+  document.getElementById('disp-policy').textContent = policyNum || '—';
+  document.getElementById('disp-name').textContent   = getParam('name') || customer.name || '—';
+
+  /* Timestamp */
+  var now = new Date();
+  var ts  = (now.getMonth()+1).toString().padStart(2,'0') + '/' +
+            now.getDate().toString().padStart(2,'0') + '/' +
+            now.getFullYear() + ' ' +
+            now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+  document.getElementById('disp-timestamp').textContent = ts;
+
+  /* Old address (from customer record — intentionally unchanged) */
+  document.getElementById('old-street').textContent    = customer.street || '—';
+  document.getElementById('old-citystate').textContent = customer.city && customer.state
+    ? customer.city + ', ' + customer.state + ' ' + customer.zip
+    : '—';
+
+  /* New (requested) address from URL params */
+  var newStreet = getParam('address1');
+  var newA2     = getParam('address2');
+  var newCity   = getParam('city');
+  var newState  = getParam('state');
+  var newZip    = getParam('zip');
+
+  if (newA2) newStreet += ', ' + newA2;
+  document.getElementById('new-street').textContent    = newStreet || '—';
+  document.getElementById('new-citystate').textContent = newCity && newState
+    ? newCity + ', ' + newState + ' ' + newZip
+    : '—';
+</script>
+
+</body>
+</html>
